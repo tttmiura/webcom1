@@ -26,7 +26,9 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+		<script src='public/js/core.js'></script>
 		<script src='public/js/x-btn.js'></script>
+		<script src='public/js/x-tags.js'></script>
 	</head>
 
 	<body>
@@ -44,6 +46,7 @@
 					<ul>
 						<li><a href='#' onClick='Reveal.slide(2,0); return false;'>Custom Elementsとは</a></li>
 						<li><a href='#' onClick='Reveal.slide(3,0); return false;'>X-tag</a></li>
+						<li><a href='#' onClick='Reveal.slide(4,0); return false;'>その他</a></li>
 					</ul>
 				</section>
 				<section>
@@ -58,8 +61,8 @@
 					<section>
 						<h4>HTML記述</h4>
 						<pre><code>
-<x-btn txt='テストボタン1' alert='TEST1'></x-btn>
-<x-btn txt='テストボタン2' alert='TEST2'></x-btn>
+&lt;x-btn txt='テストボタン1' alert='TEST1'></x-btn>
+&lt;x-btn txt='テストボタン2' alert='TEST2'></x-btn>
 						</code></pre>
 					</section>
 					<section>
@@ -83,8 +86,55 @@ var Xbtn = document.registerElement('x-btn', {
 				</section>
 				<section>
 					<section>
-						<h3>なんかかく</h3>
+						<h3>X-tag</h3>
+						<h4>Web Componentsの作成をサポートするライブラリ</h4>
+						<a href="https://x-tag.readme.io/">気になる人のための参考リンク</a>
 					</section>
+					<section>
+						<x-btn2 txt='テストボタン1' alert='TEST1'></x-btn2>
+						<x-btn2 txt='テストボタン2' alert='TEST2'></x-btn2>
+					</section>
+					<section>
+						<h4>JS記述</h4>
+						<pre><code>
+xtag.register('x-btn2', {
+	// インスタンス生成時の処理などを設定
+	lifecycle:{
+		created: function() {
+			var btn = document.createElement('button');
+			btn.innerHTML = this.txt;
+			this.appendChild(btn);
+		}
+	},
+	// アクセサを設定
+	accessors: {
+		txt:{
+			attribute:{}
+		},
+		alert:{
+			attribute:{}
+		}
+	},
+	// イベントを設定
+	events:{
+		'click:delegate(button)':function() {
+			alert(this.parentElement.alert);
+		}
+	}
+});
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>その他</h3>
+						<h4>コンポーネントをまとめたライブラリ</h4>
+						<p><a href="http://mozbrick.github.io/">brick</a></p>
+						<p><a href="https://www.polymer-project.org/1.0/">polymer</a></p>
+					</section>
+				</section>
+				<section>
+					<h1>おわり</h1>
 				</section>
 			</div>
 
