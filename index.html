@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>準備中</title>
+		<title>Custom Elements編</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
@@ -26,6 +26,7 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+		<script src='public/js/x-btn.js'></script>
 	</head>
 
 	<body>
@@ -35,10 +36,55 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>準備中</h1>
+					<h1>Web Componentsいろいろ</h1>
+					<h2>Custom Elements編</h2>
 				</section>
 				<section>
-					<h1>なんか書く</h1>
+					<h3>目次</h3>
+					<ul>
+						<li><a href='#' onClick='Reveal.slide(2,0); return false;'>Custom Elementsとは</a></li>
+						<li><a href='#' onClick='Reveal.slide(3,0); return false;'>X-tag</a></li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h3>Custom Elements</h3>
+						<h4>新しい型の HTML 要素を作る ことができる</h4>
+					</section>
+					<section>
+						<x-btn txt='テストボタン1' alert='TEST1'></x-btn>
+						<x-btn txt='テストボタン2' alert='TEST2'></x-btn>
+					</section>
+					<section>
+						<h4>HTML記述</h4>
+						<pre><code>
+<x-btn txt='テストボタン1' alert='TEST1'></x-btn>
+<x-btn txt='テストボタン2' alert='TEST2'></x-btn>
+						</code></pre>
+					</section>
+					<section>
+						<h4>JS記述</h4>
+						<pre><code>
+XbtnProto = Object.create(HTMLElement.prototype);
+XbtnProto.createdCallback = function() {
+	var self = this;
+	var btn = document.createElement('button');
+	btn.innerHTML = self.attributes.txt.nodeValue;
+	btn.onclick = function() {
+		alert(self.attributes.alert.nodeValue);
+	};
+	this.appendChild(btn);
+};
+var Xbtn = document.registerElement('x-btn', {
+	prototype:XbtnProto
+});
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>なんかかく</h3>
+					</section>
 				</section>
 			</div>
 
